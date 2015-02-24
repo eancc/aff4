@@ -34,7 +34,15 @@ ript>
    <nav class="navbar navbar-inverse navbar-fixed-top"
      role="navigation">
      <div class="container-fluid">
-       <div class="navbar-collapse collapse">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+       </div>
+       <div class="navbar-collapse collapse" id="navigationbar">
          <ul class="nav navbar-nav">
 
         <li>
@@ -64,7 +72,7 @@ ript>
 
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-2">
+  <div class="hidden-xs col-md-3">
     
  <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
   <span class="glyphicon glyphicon-arrow-left"></span> docs
@@ -77,20 +85,32 @@ ript>
  <div class='css-treeview'>
    <ul class='nav nav-stacked'>
 <li>
+  <input type="checkbox" id="item-/Streams" />
+  <label for="item-/Streams" class="category">
+    Streams
+  </label>
+<ul class='nav nav-stacked'>
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/FileBasedStream.html' class="tree-link activate_tooltip"  title="File Based Streams">
+      File Based Streams
+   </a>
+</li>
+</ul></li>
+<li>
+  <input type="checkbox" id="item-/Volumes" />
+  <label for="item-/Volumes" class="category">
+    Volumes
+  </label>
+<ul class='nav nav-stacked'>
+<li class="page_title_link">
+   <a href='/docs/Overview/Volumes/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
+      The AFF4 ZipFile Volume
+   </a>
+</li>
+</ul></li>
+<li class="page_title_link">
    <a href='/docs/Overview/Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
-      AFF4 Introducti ...
-   </a>
-</li>
-
-<li>
-   <a href='/docs/Overview/Volumes.html' class="tree-link "  title="AFF4 Volumes">
-      AFF4 Volumes
-   </a>
-</li>
-
-<li>
-   <a href='/docs/Overview/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
-      The AFF4 ZipFil ...
+      AFF4 Introduction and basic concepts.
    </a>
 </li>
 </ul>
@@ -98,20 +118,12 @@ ript>
 
   </div>
 
-  <div class="col-md-8">
-    
+  <div class="col-md-7">
+    <div class="aff4_content">
+      
 
 <nav class="navbar navbar-default" role="navigation">
 
-
-  <ul class="nav navbar-nav navbar-right">
-    <li class="active">
-       <a href="/docs/Overview/Volumes.html">
-          AFF4 Volumes
-          <span class="glyphicon glyphicon-arrow-right"></span>
-       </a>
-    </li>
-  </ul>
 
 </nav>
 
@@ -252,18 +264,10 @@ triples may be omitted for each AFF4 object type.</p>
 <nav class="navbar navbar-default" role="navigation">
 
 
-  <ul class="nav navbar-nav navbar-right">
-    <li class="active">
-       <a href="/docs/Overview/Volumes.html">
-          AFF4 Volumes
-          <span class="glyphicon glyphicon-arrow-right"></span>
-       </a>
-    </li>
-  </ul>
-
 </nav>
 
 
+    </div>
   </div>
   <div class="col-md-2 sidebar">
     <img src="/img/AFF4.png" class="logo"></img>

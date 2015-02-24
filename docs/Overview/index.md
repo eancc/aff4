@@ -1,5 +1,5 @@
 ---
-layout: docs
-title: AFF4 Overview
+layout: redirect
+target: Introduction.html
 order: 1
 ---

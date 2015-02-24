@@ -29,7 +29,15 @@ def navigation(page=None):
    <nav class="navbar navbar-inverse navbar-fixed-top"
      role="navigation">
      <div class="container-fluid">
-       <div class="navbar-collapse collapse">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+       </div>
+       <div class="navbar-collapse collapse" id="navigationbar">
          <ul class="nav navbar-nav">
 """.format(site=SITE)
 
@@ -69,12 +77,14 @@ def default(page=None):
 {nav}
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-2">
+  <div class="hidden-xs col-md-3">
     {page.navigator}
   </div>
 
-  <div class="col-md-8">
-    {page.content}
+  <div class="col-md-7">
+    <div class="aff4_content">
+      {page.content}
+    </div>
   </div>
   <div class="col-md-2 sidebar">
     {sidebar}
@@ -159,13 +169,10 @@ def _render_categories(path, width):
     # Now render the files.
     for page in sorted(files, key=lambda x: x.title):
         abbrev = page.title
-        tooltip = ""
-        if len(abbrev) > width:
-            abbrev = abbrev[:width] + " ..."
-            tooltip = "activate_tooltip"
+        tooltip = "activate_tooltip"
 
         result += """
-<li>
+<li class="page_title_link">
    <a href='{page.url}' class="tree-link {tooltip}"  title="{page.title}">
       {abbrev}
    </a>

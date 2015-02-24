@@ -34,7 +34,15 @@ ript>
    <nav class="navbar navbar-inverse navbar-fixed-top"
      role="navigation">
      <div class="container-fluid">
-       <div class="navbar-collapse collapse">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+       </div>
+       <div class="navbar-collapse collapse" id="navigationbar">
          <ul class="nav navbar-nav">
 
         <li>
@@ -64,33 +72,21 @@ ript>
 
 <div class="container-fluid">
 <div class="row">
-  <div class="col-md-2">
+  <div class="hidden-xs col-md-3">
     
- <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
-  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ <a href="/docs/Overview/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> Overview
  </a>
 
- <a href='/docs/Overview/index.html' class="btn btn-default btn-lg btn-block">
-   Overview
+ <a href='/docs/Overview/Volumes/index.html' class="btn btn-default btn-lg btn-block">
+   Volumes
  </a>
  <p>
  <div class='css-treeview'>
    <ul class='nav nav-stacked'>
-<li>
-   <a href='/docs/Overview/Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
-      AFF4 Introducti ...
-   </a>
-</li>
-
-<li>
-   <a href='/docs/Overview/Volumes.html' class="tree-link "  title="AFF4 Volumes">
-      AFF4 Volumes
-   </a>
-</li>
-
-<li>
-   <a href='/docs/Overview/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
-      The AFF4 ZipFil ...
+<li class="page_title_link">
+   <a href='/docs/Overview/Volumes/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
+      The AFF4 ZipFile Volume
    </a>
 </li>
 </ul>
@@ -98,31 +94,9 @@ ript>
 
   </div>
 
-  <div class="col-md-8">
-    
-
-<nav class="navbar navbar-default" role="navigation">
-
-  <ul class="nav navbar-nav navbar-left">
-    <li class="active">
-       <a href="/docs/Overview/Introduction.html">
-         <span class="glyphicon glyphicon-arrow-left"></span>
-         AFF4 Introduction and basic concepts.
-       </a>
-    </li>
-  </ul>
-
-
-  <ul class="nav navbar-nav navbar-right">
-    <li class="active">
-       <a href="/docs/Overview/ZipFile.html">
-          The AFF4 ZipFile Volume
-          <span class="glyphicon glyphicon-arrow-right"></span>
-       </a>
-    </li>
-  </ul>
-
-</nav>
+  <div class="col-md-7">
+    <div class="aff4_content">
+      
 
 
 <h1>AFF4 Volumes</h1>
@@ -158,30 +132,8 @@ AFF4 URNs in their abstract form, and then locate them with in the volume.</p>
 
 <p>
 
-<nav class="navbar navbar-default" role="navigation">
 
-  <ul class="nav navbar-nav navbar-left">
-    <li class="active">
-       <a href="/docs/Overview/Introduction.html">
-         <span class="glyphicon glyphicon-arrow-left"></span>
-         AFF4 Introduction and basic concepts.
-       </a>
-    </li>
-  </ul>
-
-
-  <ul class="nav navbar-nav navbar-right">
-    <li class="active">
-       <a href="/docs/Overview/ZipFile.html">
-          The AFF4 ZipFile Volume
-          <span class="glyphicon glyphicon-arrow-right"></span>
-       </a>
-    </li>
-  </ul>
-
-</nav>
-
-
+    </div>
   </div>
   <div class="col-md-2 sidebar">
     <img src="/img/AFF4.png" class="logo"></img>

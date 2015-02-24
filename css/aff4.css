@@ -8,6 +8,16 @@ td, th {
     padding: 5px;
 }
 
+.aff4_content {
+ max-width: 800px;
+}
+
+li.page_title_link {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .css-treeview .nav > li > a {
   padding: 0px;
 }
