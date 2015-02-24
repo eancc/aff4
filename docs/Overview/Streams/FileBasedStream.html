@@ -57,6 +57,12 @@ ript>
           </a>
         </li>
 
+        <li>
+          <a class="" href="/code.html">
+            GitHub
+          </a>
+        </li>
+
          </ul>
          <form class="navbar-form navbar-right" role="search" action="/search.html">
            <div class="form-group">
@@ -89,6 +95,24 @@ ript>
       File Based Streams
    </a>
 </li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Segment.html' class="tree-link activate_tooltip"  title="Segments">
+      Segments
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Image.html' class="tree-link activate_tooltip"  title="The AFF4 Image stream.">
+      The AFF4 Image stream.
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Map.html' class="tree-link activate_tooltip"  title="The AFF4 Map stream.">
+      The AFF4 Map stream.
+   </a>
+</li>
 </ul>
  </div>
 
@@ -100,6 +124,15 @@ ript>
 
 <nav class="navbar navbar-default" role="navigation">
 
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Segment.html">
+          Segments
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
 
 </nav>
 
@@ -114,12 +147,45 @@ ript>
 
 
 
-<p>AFF4 uses File Based Streams to store data backed by a file on the filesystem.</p>
+<p>AFF4 uses <em>FileBackedObject</em> to store data backed by a file on the
+filesystem. Like all AFF4 objects, the <em>FileBackedObject</em> has a URN which uses
+the <em>file</em> scheme to denote the path to the file.</p>
+<p>Strictly the file URN is not globally unique, and therefore not suitable as an
+AFF4 URN. For this reason it is not usually stored permanently in volumes, but
+it is usually inferred.</p>
+<p>The AFF4 library will not usually create a new file or overwrite an existing
+file. Unless the attribute <em>http://aff4.org/VolatileSchema#writable</em> is set to
+&ldquo;truncate&rdquo; or &ldquo;append&rdquo;. This mechanism requires users of the library to specify
+in advance which files will be created or overwritten by setting this attribute.</p>
+<h3>Information Model</h3>
+<table>
+<thead>
+<tr>
+<th>Predicate</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>http://aff4.org/VolatileSchema#writable</em></td>
+<td>This attribute signals that the file object should be writable. It can take on the value &ldquo;truncate&rdquo; or &ldquo;append&rdquo;. Note that this predicate is volatile which means it is never written into an AFF4 container.</td>
+</tr>
+</tbody>
+</table>
 
 <p>
 
 <nav class="navbar navbar-default" role="navigation">
 
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Segment.html">
+          Segments
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
 
 </nav>
 

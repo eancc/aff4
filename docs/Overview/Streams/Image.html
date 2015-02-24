@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AFF4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Forensic File Format 4">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link href="/css/aff4.css" rel="stylesheet">
+    <link href="/css/asciidoc.css" rel="stylesheet">
+    <link href="/css/treeview.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
+ript>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+   <nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+     <div class="container-fluid">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+       </div>
+       <div class="navbar-collapse collapse" id="navigationbar">
+         <ul class="nav navbar-nav">
+
+        <li>
+          <a class="" href="/index.html">
+            AFF4
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/docs.html">
+            Documentation
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/code.html">
+            GitHub
+          </a>
+        </li>
+
+         </ul>
+         <form class="navbar-form navbar-right" role="search" action="/search.html">
+           <div class="form-group">
+             <input type="text" name="q" class="form-control" placeholder="Site Search">
+           </div>
+           <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+         </form>
+       </div> <!-- navbar-collapse -->
+     </div> <!-- container-fluid -->
+   </nav>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="hidden-xs col-md-3">
+    
+ <a href="/docs/Overview/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> Overview
+ </a>
+
+ <a href='/docs/Overview/Streams/index.html' class="btn btn-default btn-lg btn-block">
+   Streams
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/FileBasedStream.html' class="tree-link activate_tooltip"  title="File Based Streams">
+      File Based Streams
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Segment.html' class="tree-link activate_tooltip"  title="Segments">
+      Segments
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Image.html' class="tree-link activate_tooltip"  title="The AFF4 Image stream.">
+      The AFF4 Image stream.
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Map.html' class="tree-link activate_tooltip"  title="The AFF4 Map stream.">
+      The AFF4 Map stream.
+   </a>
+</li>
+</ul>
+ </div>
+
+  </div>
+
+  <div class="col-md-7">
+    <div class="aff4_content">
+      
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Segment.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         Segments
+       </a>
+    </li>
+  </ul>
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Map.html">
+          The AFF4 Map stream.
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+<h1>The AFF4 Image stream.</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>The AFF4 Image stream is the workhorse of AFF4 forensic images. It is designed
+to efficiently store a large quantity of compressed data while still making it
+fast to access the data randomly.</p>
+<p>The image data is divided in <em>chunks</em>. Each chunk is compressed separately. A
+number of chunks are collected into a single <em>segment</em> termed a <em>bevy</em>. Each
+bevy also has another segment called the <em>bevy index</em> which contains the start
+offset of each compressed chunk inside the bevy.</p>
+<p>The bevy URN is derived from the AFF4 Image URN by appending an 8 digit decimal,
+zero padded bevy id (an incrementing integer started from 0). Each bevy&rsquo;s index
+has a URN which is created by appending &ldquo;/index&rdquo; to the bevy&rsquo;s URN.</p>
+<p>For example, for an Image with URN
+<em>aff4://05d7e827-5a23-4c17-97d5-190542e05b92/dev/sda1</em>, the third bevy will be
+named <em>aff4://05d7e827-5a23-4c17-97d5-190542e05b92/dev/sda1/00000002</em> and the
+third bevy&rsquo;s index will be named<em>aff4://05d7e827-5a23-4c17-97d5-190542e05b92/dev/sda1/00000002/index</em>.</p>
+<p><img alt="The AFF4 Image format overview" src="/img/aff4_image.png" title="The AFF4 Image format overview" /></p>
+<h3>AFF4 Image properties</h3>
+<p>AFF4 Image objects are suitable for writing large quantities of contiguous data
+- for example a disk image. Note that when writing the stream, it is not
+possible to seek in the stream and that AFF4 Image streams are not sparse. The
+stream is also not encrypted or authenticated.</p>
+<p>AFF4 Image implementations may cache some of the chunks to avoid decompressing
+frequently accessed chunks.</p>
+<h3>Information model</h3>
+<p>Note that an AFF4 Image stream does not need to be stored in a single volume -
+it may be split across multiple volumes. The AFF4 Image does not actually use
+the <em>http://aff4.org/Schema#stored</em> predicate at all. The resolver attempts to
+locate the segments which make up the AFF4 Image, and therefore only needs to
+know where the segments themselves are stored. The AFF4 Image object is not
+itself stored in any single volume.</p>
+<table>
+<thead>
+<tr>
+<th>Predicate</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</em></td>
+<td>The type of object. For AFF4 Image objects this will be the URN <em>http://aff4.org/Schema#image</em> .</td>
+</tr>
+<tr>
+<td><em>http://aff4.org/Schema#chunk_size</em></td>
+<td>The (uncompressed) chunk size in bytes. This defaults to 32kb. Note that the last chunk may be shorter.</td>
+</tr>
+<tr>
+<td><em>http://aff4.org/Schema#chunks_per_segment</em></td>
+<td>How many chunks should be collected into a single bevy. Note that the last bevy may contain fewer chunks.</td>
+</tr>
+<tr>
+<td><em>http://aff4.org/Schema#compression</em></td>
+<td>How the chunks are compressed. Currently supported are <em>https://www.ietf.org/rfc/rfc1950.txt</em> (i.e. zlib.compress).</td>
+</tr>
+</tbody>
+</table>
+<h3>Example</h3>
+<p>In the following example we acquire a disk image into a new volume:</p>
+<div class="highlight"><pre><span class="nv">$ </span>aff4imager -i /dev/sda1 -o /tmp/test.aff4 -t
+Adding /dev/sda1
+<span class="nv">$ </span>aff4imager -V /tmp/test.aff4
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix aff4: &lt;http://aff4.org/Schema#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;aff4://05d7e827-5a23-4c17-97d5-190542e05b92/dev/sda1&gt;
+    aff4:chunk_size <span class="m">32768</span> <span class="p">;</span>
+    aff4:chunks_per_segment <span class="m">1024</span> <span class="p">;</span>
+    aff4:compression &lt;https://www.ietf.org/rfc/rfc1950.txt&gt; <span class="p">;</span>
+    aff4:size <span class="m">770786816</span> <span class="p">;</span>
+    aff4:stored &lt;aff4://05d7e827-5a23-4c17-97d5-190542e05b92&gt; <span class="p">;</span>
+    a aff4:image .
+
+<span class="nv">$ </span>unzip -l /tmp/test.aff4
+Archive:  /tmp/test.aff4
+aff4://05d7e827-5a23-4c17-97d5-190542e05b92
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+      <span class="m">439</span>  2015-02-24 17:06   information.turtle
+ <span class="m">13859347</span>  2015-02-24 17:06   dev/sda1/00000001
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000007/index
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000010/index
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000000/index
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000009/index
+     <span class="m">3980</span>  2015-02-24 17:06   dev/sda1/00000022/index
+  <span class="m">7191448</span>  2015-02-24 17:06   dev/sda1/00000015
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000017/index
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000008/index
+     <span class="m">4096</span>  2015-02-24 17:06   dev/sda1/00000019/index
+....
+</pre></div>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Segment.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         Segments
+       </a>
+    </li>
+  </ul>
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Map.html">
+          The AFF4 Map stream.
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+    </div>
+  </div>
+  <div class="col-md-2 sidebar">
+    <img src="/img/AFF4.png" class="logo"></img>
+
+  </div>
+</div>
+</div>
+  <script>
+   $(".activate_tooltip").tooltip();
+  </script>
+  </body>
+</html>
+

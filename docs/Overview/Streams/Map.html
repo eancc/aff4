@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AFF4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Forensic File Format 4">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link href="/css/aff4.css" rel="stylesheet">
+    <link href="/css/asciidoc.css" rel="stylesheet">
+    <link href="/css/treeview.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
+ript>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+   <nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+     <div class="container-fluid">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+       </div>
+       <div class="navbar-collapse collapse" id="navigationbar">
+         <ul class="nav navbar-nav">
+
+        <li>
+          <a class="" href="/index.html">
+            AFF4
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/docs.html">
+            Documentation
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/code.html">
+            GitHub
+          </a>
+        </li>
+
+         </ul>
+         <form class="navbar-form navbar-right" role="search" action="/search.html">
+           <div class="form-group">
+             <input type="text" name="q" class="form-control" placeholder="Site Search">
+           </div>
+           <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+         </form>
+       </div> <!-- navbar-collapse -->
+     </div> <!-- container-fluid -->
+   </nav>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="hidden-xs col-md-3">
+    
+ <a href="/docs/Overview/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> Overview
+ </a>
+
+ <a href='/docs/Overview/Streams/index.html' class="btn btn-default btn-lg btn-block">
+   Streams
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/FileBasedStream.html' class="tree-link activate_tooltip"  title="File Based Streams">
+      File Based Streams
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Segment.html' class="tree-link activate_tooltip"  title="Segments">
+      Segments
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Image.html' class="tree-link activate_tooltip"  title="The AFF4 Image stream.">
+      The AFF4 Image stream.
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Map.html' class="tree-link activate_tooltip"  title="The AFF4 Map stream.">
+      The AFF4 Map stream.
+   </a>
+</li>
+</ul>
+ </div>
+
+  </div>
+
+  <div class="col-md-7">
+    <div class="aff4_content">
+      
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Image.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         The AFF4 Image stream.
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+<h1>The AFF4 Map stream.</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>A lot of work in digital forensics involves copying data around. For example,
+carving files usually results with the carved files copied out of the image for
+testing. If you image a RAID array separately you end up with 3-5 disk images
+and typically you will need to copy them into a logical image (unless your
+favourite software supports RAID reconstruction). When you copy a file out of
+the image using sleuthkit, you are actually copying bits of data directly from
+the image - either allocated clusters or from within the MFT entry (for resident
+files).</p>
+<p>All these copies are wasteful of disk space. They are also hard to manage
+because pretty soon you end up with lots of copies of the same data in different
+ways. There must be a better way!!!</p>
+<p>Now there is. By having the underlying forensic format doing all the mapping
+itself it is possible to use tools which are not capable of doing these
+transformations by themselves. This is all about tool reuse. For example suppose
+you have a carver which is used to work on dd images. But you want to use it on
+the virtual memory image of the firefox process. In the past you had to copy the
+virtual memory out (it could be 2-4gb) then run the carver on it, and possibly
+end up with about 3 or 4 copies of the same data - for each process address
+space!!!</p>
+<p>Its much easier to have a tool such as Rekall create the initial maps for each
+process (with zero storage overheads), and then carvers can just use the maps
+without understanding anything about memory forensics. In this way the AFF4
+format is more of an interchange format - allowing tools to be used on the
+results from other tools.</p>
+<p>The map stream is an AFF4 object which specifies some mapping between stream
+offsets and other streams (termed <em>target</em> streams). The map specifies a
+transformation between offsets in the map&rsquo;s space and other offsets in one or
+more targets. This is illustrated below:</p>
+<p><img alt="The AFF4 map overview" src="/img/aff4_map.png" title="The AFF4 Map overview" /></p>
+<p>The map specifies a set of offset ranges and the corresponding ranges in the
+backing stream. As the figure shows this allows the map to present a sparse view
+of the data (i.e. reads in the sparse region will return null padded data).</p>
+<h3>Encoding of the map</h3>
+<p>The AFF4 Map object stores the map in a binary format in a segment with a URN
+obtained by appending &ldquo;map&rdquo; to its URN. The segment contains a list of records:</p>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">Range</span> <span class="p">{</span>
+  <span class="kt">uint64_t</span> <span class="n">map_offset</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">target_offset</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">length</span><span class="p">;</span>
+  <span class="kt">uint32_t</span> <span class="n">target_id</span><span class="p">;</span>
+<span class="p">}</span><span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">));</span>
+</pre></div>
+
+
+<p>Where targets is an index into the list of targets specified in the target
+index. The target index, in turn is another stream with a URN obtained by
+appending &ldquo;idx&rdquo; to the map stream&rsquo;s URN. The target index contains all the
+targets separated by carriage returns - one per line.</p>
+<h3>Information model</h3>
+<table>
+<thead>
+<tr>
+<th>Predicate</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</em></td>
+<td>The type of object. For AFF4 Map objects this will be the URN <em>http://aff4.org/Schema#map</em> .</td>
+</tr>
+</tbody>
+</table>
+<h3>AFF4 Map properties</h3>
+<p>The AFF4 map object can be written in random sparse order - i.e. the stream can
+be seeked as it is being written. This causes the object to automatically build
+the map while writing the data contiguously to the backing stream. Typically an
+AFF4 Map stream will use an AFF4 Image stream as its backing store.</p>
+<p>Here is an example of two ranges being created directly on the map object:</p>
+<div class="highlight"><pre>    <span class="c1">// Now an image is created inside the volume.</span>
+    <span class="n">AFF4ScopedPtr</span><span class="o">&lt;</span><span class="n">AFF4Map</span><span class="o">&gt;</span> <span class="n">image</span> <span class="o">=</span> <span class="n">AFF4Map</span><span class="o">::</span><span class="n">NewAFF4Map</span><span class="p">(</span>
+        <span class="o">&amp;</span><span class="n">resolver</span><span class="p">,</span> <span class="n">zip</span><span class="o">-&gt;</span><span class="n">urn</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">image_name</span><span class="p">),</span> <span class="n">volume_urn</span><span class="p">);</span>
+
+    <span class="c1">// Maps are written in random order.</span>
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">Seek</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;50 - This is the position.&quot;</span><span class="p">);</span>
+
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;00 - This is the position.&quot;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Let us examine the resulting volume:</p>
+<div class="highlight"><pre><span class="nv">$ </span>unzip -l /tmp/aff4_test.zip
+Archive:  /tmp/aff4_test.zip
+aff4://37a71a6a-4d33-4d96-ad99-5cda758c3a19
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+     <span class="m">2345</span>  2015-02-23 16:59   information.yaml
+      <span class="m">467</span>  2015-02-23 16:59   information.turtle
+       <span class="m">84</span>  2015-02-23 16:59   image.dd/map
+       <span class="m">58</span>  2015-02-23 16:59   image.dd/idx
+       <span class="m">38</span>  2015-02-23 16:59   image.dd/data/00000000
+        <span class="m">4</span>  2015-02-23 16:59   image.dd/data/00000000/index
+---------                     -------
+     <span class="m">2996</span>                     <span class="m">6</span> files
+
+<span class="nv">$ </span>aff4imager -V /tmp/aff4_test.zip
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix aff4: &lt;http://aff4.org/Schema#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;aff4://37a71a6a-4d33-4d96-ad99-5cda758c3a19/image.dd&gt;
+    a aff4:map .
+
+&lt;aff4://37a71a6a-4d33-4d96-ad99-5cda758c3a19/image.dd/data&gt;
+    aff4:chunk_size <span class="m">32768</span> <span class="p">;</span>
+    aff4:chunks_per_segment <span class="m">1024</span> <span class="p">;</span>
+    aff4:compression &lt;https://www.ietf.org/rfc/rfc1950.txt&gt; <span class="p">;</span>
+    aff4:size <span class="m">54</span> <span class="p">;</span>
+    aff4:stored &lt;aff4://37a71a6a-4d33-4d96-ad99-5cda758c3a19&gt; <span class="p">;</span>
+    a aff4:image .
+</pre></div>
+
+
+<p>We can see the map stream&rsquo;s &ldquo;map&rdquo; stream and &ldquo;idx&rdquo; stream and also the
+underlying target stream, in this case<em>aff4://37a71a6a-4d33-4d96-ad99-5cda758c3a19/image.dd/data</em>.</p>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Image.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         The AFF4 Image stream.
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+    </div>
+  </div>
+  <div class="col-md-2 sidebar">
+    <img src="/img/AFF4.png" class="logo"></img>
+
+  </div>
+</div>
+</div>
+  <script>
+   $(".activate_tooltip").tooltip();
+  </script>
+  </body>
+</html>
+

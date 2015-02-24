@@ -16,3 +16,9 @@ The AFF4 library will not usually create a new file or overwrite an existing
 file. Unless the attribute *http://aff4.org/VolatileSchema#writable* is set to
 "truncate" or "append". This mechanism requires users of the library to specify
 in advance which files will be created or overwritten by setting this attribute.
+
+### Information Model
+
+| Predicate |  Description |
+|-----------|--------------|
+| *http://aff4.org/VolatileSchema#writable* | This attribute signals that the file object should be writable. It can take on the value "truncate" or "append". Note that this predicate is volatile which means it is never written into an AFF4 container. |

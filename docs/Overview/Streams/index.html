@@ -57,6 +57,12 @@ ript>
           </a>
         </li>
 
+        <li>
+          <a class="" href="/code.html">
+            GitHub
+          </a>
+        </li>
+
          </ul>
          <form class="navbar-form navbar-right" role="search" action="/search.html">
            <div class="form-group">
@@ -89,6 +95,24 @@ ript>
       File Based Streams
    </a>
 </li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Segment.html' class="tree-link activate_tooltip"  title="Segments">
+      Segments
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Image.html' class="tree-link activate_tooltip"  title="The AFF4 Image stream.">
+      The AFF4 Image stream.
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Map.html' class="tree-link activate_tooltip"  title="The AFF4 Map stream.">
+      The AFF4 Map stream.
+   </a>
+</li>
 </ul>
  </div>
 
@@ -109,7 +133,12 @@ ript>
 
 
 
-<p>Streams are AFF4 objects which provide a readable interface to data.</p>
+<p>Streams are AFF4 objects which provide a readable interface to data. AFF4
+streams present a common interface:</p>
+<p>1) <em>Size()</em>: This method returns the size of the stream in bytes.
+2) <em>Seek()</em>: This method allows randomly seeking in the stream.
+3) <em>Read()</em>: This method reads some bytes from the stream at the current read pointer.
+4) <em>Write()</em>: This method adds new data to the stream.</p>
 
 <p>
 

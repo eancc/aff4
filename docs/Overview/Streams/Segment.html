@@ -77,45 +77,119 @@ ript>
    </nav>
 
 <div class="container-fluid">
-<div class="row-fluid">
-  <div class="col-md-2">
+<div class="row">
+  <div class="hidden-xs col-md-3">
     
- <a href="/docs/References/index.html" class="btn btn-default btn-lg btn-block">
-  <span class="glyphicon glyphicon-arrow-left"></span> References
+ <a href="/docs/Overview/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> Overview
  </a>
 
- <a href='/docs/References/Papers/index.html' class="btn btn-default btn-lg btn-block">
-   Papers
+ <a href='/docs/Overview/Streams/index.html' class="btn btn-default btn-lg btn-block">
+   Streams
  </a>
  <p>
  <div class='css-treeview'>
    <ul class='nav nav-stacked'>
 <li class="page_title_link">
-   <a href='/docs/References/Papers/DFRWS2009.html' class="tree-link activate_tooltip"  title="Extending the Advanced Forensic Format to accommodate Multiple  Data Sources, Logical Evidence, Arbitrary Information and Forensic Workflow.">
-      Extending the Advanced Forensic Format to accommodate Multiple  Data Sources, Logical Evidence, Arbitrary Information and Forensic Workflow.
+   <a href='/docs/Overview/Streams/FileBasedStream.html' class="tree-link activate_tooltip"  title="File Based Streams">
+      File Based Streams
    </a>
 </li>
 
 <li class="page_title_link">
-   <a href='/docs/References/Papers/DFRWS2010.html' class="tree-link activate_tooltip"  title="Hash based disk imaging using AFF4: Cohen, Michael, and Bradley Schatz. digital investigation 7 (2010): S121-S128.">
-      Hash based disk imaging using AFF4: Cohen, Michael, and Bradley Schatz. digital investigation 7 (2010): S121-S128.
+   <a href='/docs/Overview/Streams/Segment.html' class="tree-link activate_tooltip"  title="Segments">
+      Segments
    </a>
 </li>
 
 <li class="page_title_link">
-   <a href='/docs/References/Papers/advances.html' class="tree-link activate_tooltip"  title="Refining evidence containers for Provenance and accurate data Representation: Schatz, Bradley, and Michael Cohen. Advances in Digital Forensics VI. Springer Berlin Heidelberg, 2010. 227-242.">
-      Refining evidence containers for Provenance and accurate data Representation: Schatz, Bradley, and Michael Cohen. Advances in Digital Forensics VI. Springer Berlin Heidelberg, 2010. 227-242.
+   <a href='/docs/Overview/Streams/Image.html' class="tree-link activate_tooltip"  title="The AFF4 Image stream.">
+      The AFF4 Image stream.
+   </a>
+</li>
+
+<li class="page_title_link">
+   <a href='/docs/Overview/Streams/Map.html' class="tree-link activate_tooltip"  title="The AFF4 Map stream.">
+      The AFF4 Map stream.
    </a>
 </li>
 </ul>
  </div>
 
-    <a href="http://www.dfrws.org/2009/proceedings/p57-cohen.pdf" class="btn btn-default">Download</a>
   </div>
-  <div class="col-md-8" >
-    
-    <embed src="http://www.dfrws.org/2009/proceedings/p57-cohen.pdf" width="100%" type="application/pdf">
-    </embed>
+
+  <div class="col-md-7">
+    <div class="aff4_content">
+      
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/FileBasedStream.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         File Based Streams
+       </a>
+    </li>
+  </ul>
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Image.html">
+          The AFF4 Image stream.
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+<h1>Segments</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>AFF4 Segments are seekable units of data which are stored in a single unit. When
+a segment is loaded, the entire segment exists in memory at the same time. For
+this reason the segment size should be limited and not very large.</p>
+<p>The <em>ZipFileSegment</em> is a special kind of segment which is stored in an AFF4
+ZipFile volume. It is stored in a single archive member and <em>may</em> be compressed
+inside the archive using the zlib deflate compression.</p>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Streams/FileBasedStream.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         File Based Streams
+       </a>
+    </li>
+  </ul>
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/Streams/Image.html">
+          The AFF4 Image stream.
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+    </div>
   </div>
   <div class="col-md-2 sidebar">
     <img src="/img/AFF4.png" class="logo"></img>
@@ -123,14 +197,6 @@ ript>
   </div>
 </div>
 </div>
-<script>
-  $(window).resize(function(){
-    var height = $(window).height() - 100;
-    $('embed').height(height);
-  });
-
-  $(window).resize();
-</script>
   <script>
    $(".activate_tooltip").tooltip();
   </script>
