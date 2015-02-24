@@ -1,6 +1,11 @@
 img.logo {
-    width: 100%;
+    width: 240px;
+    position: fixed;
     float: right;
+}
+
+td, th {
+    padding: 5px;
 }
 
 .css-treeview .nav > li > a {

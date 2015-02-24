@@ -34,16 +34,12 @@ ript>
    <nav class="navbar navbar-inverse navbar-fixed-top"
      role="navigation">
      <div class="container-fluid">
-       <div class="navbar-header">
-         <a class="navbar-brand" href="#">AFF4</a>
-       </div>
-
        <div class="navbar-collapse collapse">
          <ul class="nav navbar-nav">
 
         <li>
           <a class="" href="/index.html">
-            Home
+            AFF4
           </a>
         </li>
 
@@ -81,14 +77,20 @@ ript>
  <div class='css-treeview'>
    <ul class='nav nav-stacked'>
 <li>
-   <a href='/docs/Overview/1_Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
+   <a href='/docs/Overview/Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
       AFF4 Introducti ...
    </a>
 </li>
 
 <li>
-   <a href='/docs/Overview/2_Volumes.html' class="tree-link "  title="AFF4 Volumes">
+   <a href='/docs/Overview/Volumes.html' class="tree-link "  title="AFF4 Volumes">
       AFF4 Volumes
+   </a>
+</li>
+
+<li>
+   <a href='/docs/Overview/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
+      The AFF4 ZipFil ...
    </a>
 </li>
 </ul>
@@ -104,7 +106,7 @@ ript>
 
   <ul class="nav navbar-nav navbar-right">
     <li class="active">
-       <a href="/docs/Overview/2_Volumes.html">
+       <a href="/docs/Overview/Volumes.html">
           AFF4 Volumes
           <span class="glyphicon glyphicon-arrow-right"></span>
        </a>
@@ -238,9 +240,9 @@ using RDF triples. However, in practice many triples are implicitly
 stated. Either because they take on a default value, or because their facts are
 obvious.</p>
 <p>For example, the AFF4 predicate <em>aff4:stored</em> describes where an AFF4 object is
-stored (which volume). However, when parsing an AFF4 volume we often already
-know some objects contained within it, simply by virtue of the volume format
-itself. It is therefore not needed to state these triples explicitely.</p>
+stored. However, when parsing an AFF4 volume we often already know some objects
+contained within it, simply by virtue of the volume format itself. It is
+therefore not needed to state these triples explicitely.</p>
 <p>AFF4 standard objects often define implicit relations and therefore allow some
 RDF statement to be deduced by context. In the following we will describe what
 triples may be omitted for each AFF4 object type.</p>
@@ -252,7 +254,7 @@ triples may be omitted for each AFF4 object type.</p>
 
   <ul class="nav navbar-nav navbar-right">
     <li class="active">
-       <a href="/docs/Overview/2_Volumes.html">
+       <a href="/docs/Overview/Volumes.html">
           AFF4 Volumes
           <span class="glyphicon glyphicon-arrow-right"></span>
        </a>

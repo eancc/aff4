@@ -63,49 +63,45 @@ ript>
    </nav>
 
 <div class="container-fluid">
-<div class="row">
+<div class="row-fluid">
   <div class="col-md-2">
     
- <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
-  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ <a href="/docs/References/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> References
  </a>
 
- <a href='/docs/Developers/index.html' class="btn btn-default btn-lg btn-block">
-   Developers
+ <a href='/docs/References/Papers/index.html' class="btn btn-default btn-lg btn-block">
+   Papers
  </a>
  <p>
  <div class='css-treeview'>
    <ul class='nav nav-stacked'>
 <li>
-   <a href='/docs/Developers/AFF4Objects.html' class="tree-link "  title="The AFF4Object.">
-      The AFF4Object.
+   <a href='/docs/References/Papers/DFRWS2009.html' class="tree-link activate_tooltip"  title="Extending the Advanced Forensic Format to accommodate Multiple  Data Sources, Logical Evidence, Arbitrary Information and Forensic Workflow.">
+      Extending the A ...
+   </a>
+</li>
+
+<li>
+   <a href='/docs/References/Papers/DFRWS2010.html' class="tree-link activate_tooltip"  title="Hash based disk imaging using AFF4: Cohen, Michael, and Bradley Schatz. digital investigation 7 (2010): S121-S128.">
+      Hash based disk ...
+   </a>
+</li>
+
+<li>
+   <a href='/docs/References/Papers/advances.html' class="tree-link activate_tooltip"  title="Refining evidence containers for Provenance and accurate data Representation: Schatz, Bradley, and Michael Cohen. Advances in Digital Forensics VI. Springer Berlin Heidelberg, 2010. 227-242.">
+      Refining eviden ...
    </a>
 </li>
 </ul>
  </div>
 
+    <a href="http://www.dfrws.org/2009/proceedings/p57-cohen.pdf" class="btn btn-default">Download</a>
   </div>
-
-  <div class="col-md-8">
+  <div class="col-md-8" >
     
-
-
-<h1>Developers</h1>
-
-<div class="abstract">
-
-</div>
-
-
-
-
-
-<p>These documents are intended for developers. They cover internal application
-APIs and implementation details.</p>
-
-<p>
-
-
+    <embed src="http://www.dfrws.org/2009/proceedings/p57-cohen.pdf" width="100%" type="application/pdf">
+    </embed>
   </div>
   <div class="col-md-2 sidebar">
     <img src="/img/AFF4.png" class="logo"></img>
@@ -113,6 +109,14 @@ APIs and implementation details.</p>
   </div>
 </div>
 </div>
+<script>
+  $(window).resize(function(){
+    var height = $(window).height() - 100;
+    $('embed').height(height);
+  });
+
+  $(window).resize();
+</script>
   <script>
    $(".activate_tooltip").tooltip();
   </script>

@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: AFF4 Introduction and basic concepts.
+order: 1
 ---
 
 ## History
@@ -124,9 +125,9 @@ stated. Either because they take on a default value, or because their facts are
 obvious.
 
 For example, the AFF4 predicate *aff4:stored* describes where an AFF4 object is
-stored (which volume). However, when parsing an AFF4 volume we often already
-know some objects contained within it, simply by virtue of the volume format
-itself. It is therefore not needed to state these triples explicitely.
+stored. However, when parsing an AFF4 volume we often already know some objects
+contained within it, simply by virtue of the volume format itself. It is
+therefore not needed to state these triples explicitely.
 
 AFF4 standard objects often define implicit relations and therefore allow some
 RDF statement to be deduced by context. In the following we will describe what

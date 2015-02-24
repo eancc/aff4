@@ -29,10 +29,6 @@ def navigation(page=None):
    <nav class="navbar navbar-inverse navbar-fixed-top"
      role="navigation">
      <div class="container-fluid">
-       <div class="navbar-header">
-         <a class="navbar-brand" href="#">{site.name}</a>
-       </div>
-
        <div class="navbar-collapse collapse">
          <ul class="nav navbar-nav">
 """.format(site=SITE)
@@ -135,7 +131,8 @@ def _list_subpages(path):
             files.append(page)
 
     files.sort(key=lambda x: (x.order or x.title))
-    directories.sort(key=lambda x: (x.index.order or x.title))
+    directories.sort(key=lambda x: (
+        getattr(x.index, "order", None) or x.title))
 
     return directories, files
 

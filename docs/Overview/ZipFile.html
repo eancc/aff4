@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AFF4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Forensic File Format 4">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link href="/css/aff4.css" rel="stylesheet">
+    <link href="/css/asciidoc.css" rel="stylesheet">
+    <link href="/css/treeview.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
+ript>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+   <nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+     <div class="container-fluid">
+       <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+
+        <li>
+          <a class="" href="/index.html">
+            AFF4
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/docs.html">
+            Documentation
+          </a>
+        </li>
+
+         </ul>
+         <form class="navbar-form navbar-right" role="search" action="/search.html">
+           <div class="form-group">
+             <input type="text" name="q" class="form-control" placeholder="Site Search">
+           </div>
+           <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+         </form>
+       </div> <!-- navbar-collapse -->
+     </div> <!-- container-fluid -->
+   </nav>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-2">
+    
+ <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ </a>
+
+ <a href='/docs/Overview/index.html' class="btn btn-default btn-lg btn-block">
+   Overview
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li>
+   <a href='/docs/Overview/Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
+      AFF4 Introducti ...
+   </a>
+</li>
+
+<li>
+   <a href='/docs/Overview/Volumes.html' class="tree-link "  title="AFF4 Volumes">
+      AFF4 Volumes
+   </a>
+</li>
+
+<li>
+   <a href='/docs/Overview/ZipFile.html' class="tree-link activate_tooltip"  title="The AFF4 ZipFile Volume">
+      The AFF4 ZipFil ...
+   </a>
+</li>
+</ul>
+ </div>
+
+  </div>
+
+  <div class="col-md-8">
+    
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Volumes.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         AFF4 Volumes
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+<h1>The AFF4 ZipFile Volume</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>The AFF4 <em>ZipFile</em> volume uses a zip file to store AFF4 objects. The AFF4 volume
+has a unique URN which is also stored as a Zip file comment.</p>
+<p>The AFF4 information model relating to the AFF4 objects stored in the ZipFile is
+serialized into a zip member called <em>information.turtle</em> using the turtle RDF
+serialization format.</p>
+<h3>An AFF4 <em>ZipFileSegment</em></h3>
+<p>A <em>ZipFileSegment</em> is an AFF4 object representing a single member of the zip
+file.</p>
+<h4>ZipFileSegment filename encoding.</h4>
+<p>Like other AFF4 objects, the Segment has a fully qualified URN. This URN
+is encoded as the zip member file name using the following encoding scheme:</p>
+<ol>
+<li>
+<p>If the Segment URN begins with the Volume URN, the filename consists of the
+non common prefix. Therefore filenames are essentially specified relative to the
+volume URN.</p>
+</li>
+<li>
+<p>The following characters must be % encoded: \/:*?&rdquo;&lt;&gt;|</p>
+</li>
+<li>
+<p>Repeated sequences of / must be % encoded. Single / sequences should be
+preserved.</p>
+</li>
+<li>
+<p>Filenames should not contain directory traversal characters such as . or .. -
+They should also not begin with a leading /.</p>
+</li>
+</ol>
+<p>The following example show some URNs encoded into a segment filename. For this example we assume that the Volume URN is <em>aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041</em>:</p>
+<table>
+<thead>
+<tr>
+<th>URN</th>
+<th>Zip filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041/bash</td>
+<td>bash</td>
+</tr>
+<tr>
+<td>aff4://7a71a6a-4d33-4d96-ad99-5cda758c3a19/image.dd</td>
+<td>aff4%3a%2f%2f7a71a6a-4d33-4d96-ad99-5cda758c3a19/image.dd</td>
+</tr>
+</tbody>
+</table>
+<p>Although the implementation can choose any URNs to describe objects that it
+creates (as long as they are globally unique), usually implementations will
+select a URN which is derived from the volume URN so that the segment filenames
+are short and meaningful.</p>
+<p>For example consider the following example where a logical image of a file is
+taken:</p>
+<div class="highlight"><pre><span class="nv">$ </span>aff4imager -i /bin/ls -o /tmp/test.aff4
+Adding /bin/ls
+
+<span class="nv">$ </span>unzip -l /tmp/test.aff4
+Archive:  /tmp/test.aff4
+aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+     <span class="m">1639</span>  2015-02-24 12:39   information.yaml
+      <span class="m">413</span>  2015-02-24 12:39   information.turtle
+    <span class="m">51005</span>  2015-02-24 12:39   bin/ls/00000000
+       <span class="m">16</span>  2015-02-24 12:39   bin/ls/00000000/index
+---------                     -------
+    <span class="m">53073</span>                     <span class="m">4</span> files
+</pre></div>
+
+
+<p>In this example, the imager acquires the file <em>/bin/ls</em> into a new volume. The
+new volume receives the URN <em>aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7</em> (and
+it is stored in <em>/tmp/test.aff4</em>). The new image URN is selected to be
+<em>aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls</em> - this is still unique but
+it provides some context.</p>
+<p>We can use a regular zip file tool to examine the members of the zip file. We
+can see the segment filename <em>bin/ls/00000000</em>. As far as the AFF4 information
+model is concerned, this segment represents the AFF4 object with URN
+<em>aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls/00000000</em>.</p>
+<p>One advantage of the AFF4 ZipFile volume is that, since it uses the well tested
+and ubiquotous zip file format there is widespread support for recovering
+corrupted zip files, carving zip files from disk and manipulating zip
+file. Another advantage is that a ZipFile volume can be trivially extracted to a
+directory, which turns it into an AFF4 <em>DirectoryVolume</em>.</p>
+<p>Additionally the ZipFile supports amending the archive and adding additional
+segments. AFF4 ZipFile volumes are therefore maliable. It is possible to add new
+AFF4 objects into the same volume. This is useful when acquiring new logical
+files in several steps - or acquiring a disk image and a memory image at the
+same time.</p>
+<h2>Information model</h2>
+<table>
+<thead>
+<tr>
+<th>Predicate</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>http://aff4.org/Schema#stored</em></td>
+<td>When applied to a ZipFile volume, this specifies the URN of the stream which contains the ZipFile volume (This fact is typically inferred). When applied to a ZipFileSegment this specifies the ZipFile volume which contains the segment.</td>
+</tr>
+<tr>
+<td><em>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</em></td>
+<td>The type of object. For ZipFile object this will be the URN <em>http://aff4.org/Schema#zip_volume</em> . This fact is also typically inferred when a zip file format is detected.</td>
+</tr>
+<tr>
+<td><em>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</em></td>
+<td>The type of object. For ZipFileSegments objects this will be the URN <em>http://aff4.org/Schema#zip_segment</em> . This fact is typically inferred when a zip file format is parsed.</td>
+</tr>
+</tbody>
+</table>
+<h3>Example</h3>
+<p>The following is the information model contained in the ZipFile volume obtained
+above:</p>
+<div class="highlight"><pre><span class="nv">$ </span>aff4imager -V /tmp/test.aff4
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix aff4: &lt;http://aff4.org/Schema#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls&gt;
+    aff4:chunk_size <span class="m">32768</span> <span class="p">;</span>
+    aff4:chunks_per_segment <span class="m">1024</span> <span class="p">;</span>
+    aff4:compression &lt;https://www.ietf.org/rfc/rfc1950.txt&gt; <span class="p">;</span>
+    aff4:size <span class="m">110080</span> <span class="p">;</span>
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:image .
+
+<span class="nv">$ </span>aff4imager -v -V /tmp/test.aff4
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix aff4: &lt;http://aff4.org/Schema#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt;
+    aff4:stored &lt;file:///tmp/test.aff4&gt; <span class="p">;</span>
+    a aff4:zip_volume .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls&gt;
+    aff4:chunk_size <span class="m">32768</span> <span class="p">;</span>
+    aff4:chunks_per_segment <span class="m">1024</span> <span class="p">;</span>
+    aff4:compression &lt;https://www.ietf.org/rfc/rfc1950.txt&gt; <span class="p">;</span>
+    aff4:size <span class="m">110080</span> <span class="p">;</span>
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:image .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls/00000000&gt;
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:zip_segment .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls/00000000/index&gt;
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:zip_segment .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/information.turtle&gt;
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:zip_segment .
+
+&lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/information.yaml&gt;
+    aff4:stored &lt;aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7&gt; <span class="p">;</span>
+    a aff4:zip_segment .
+</pre></div>
+
+
+<p>In the first example we dump the information explicitely stored in the
+volume. We see a single stream
+<em>aff4://6cb5ce35-b28c-481a-8f0b-a79f17a32dd7/bin/ls</em> which is of type
+<em>http://aff4.org/Schema#image</em>.</p>
+<p>In the second example we request (using the -v) to dump all triples, even
+inferred ones. In this second case we see many additional objects, such as the
+volume itself (<em>aff4:zip_volume</em>), and each ZipFileSegment (<em>aff4:zip_segment</em>)
+contained in the volume. These objects are known by the AFF4 Resolver by parsing
+the Zip archive itself, hence they do not need to be specified in the
+<em>information.turtle</em> file itself.</p>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/Volumes.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         AFF4 Volumes
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+  </div>
+  <div class="col-md-2 sidebar">
+    <img src="/img/AFF4.png" class="logo"></img>
+
+  </div>
+</div>
+</div>
+  <script>
+   $(".activate_tooltip").tooltip();
+  </script>
+  </body>
+</html>
+
