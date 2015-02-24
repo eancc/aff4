@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AFF4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Forensic File Format 4">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link href="/css/aff4.css" rel="stylesheet">
+    <link href="/css/asciidoc.css" rel="stylesheet">
+    <link href="/css/treeview.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
+ript>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+   <nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+     <div class="container-fluid">
+       <div class="navbar-header">
+         <a class="navbar-brand" href="#">AFF4</a>
+       </div>
+
+       <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+
+        <li>
+          <a class="" href="/index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/docs.html">
+            Documentation
+          </a>
+        </li>
+
+         </ul>
+         <form class="navbar-form navbar-right" role="search" action="/search.html">
+           <div class="form-group">
+             <input type="text" name="q" class="form-control" placeholder="Site Search">
+           </div>
+           <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+         </form>
+       </div> <!-- navbar-collapse -->
+     </div> <!-- container-fluid -->
+   </nav>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-2">
+    
+ <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ </a>
+
+ <a href='/docs/Overview/index.html' class="btn btn-default btn-lg btn-block">
+   Overview
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li>
+   <a href='/docs/Overview/1_Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
+      AFF4 Introducti ...
+   </a>
+</li>
+
+<li>
+   <a href='/docs/Overview/2_Volumes.html' class="tree-link "  title="AFF4 Volumes">
+      AFF4 Volumes
+   </a>
+</li>
+</ul>
+ </div>
+
+  </div>
+
+  <div class="col-md-8">
+    
+
+<nav class="navbar navbar-default" role="navigation">
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/2_Volumes.html">
+          AFF4 Volumes
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+<h1>AFF4 Introduction and basic concepts.</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<h2>History</h2>
+<p>AFF4 is an evolution in forensic imaging technology. It is instructive to
+examine where forensic images came from, historically, in order to understand
+what AFF4 is attempting to solve.</p>
+<h3>Raw images.</h3>
+<p>The raw image (or sometimes named the <em>dd</em> image) is the oldest forms of
+forensic images. It was historically obtained by running the dd command to copy
+raw bytes from a disk into an image file. The dd image has a simple format -
+each byte in the image corresponds to a precise byte in the source media.</p>
+<p>Despite their extreme simplicity, a raw image has several shortcomings:</p>
+<ol>
+<li>
+<p>It can contain no compression - the size of the image is the same as the size
+of the acquired disk.</p>
+</li>
+<li>
+<p>It is typically not possible to represent a sparse source media - in some
+applications (e.g. a memory image), not all source regions are readable. Raw
+images must pad these regions with something to maintain alignment (typically
+unavailable regions are padded with zeros).</p>
+</li>
+<li>
+<p>No metadata is kept with the image. metadata must be kept externally and
+manually associated with the image.</p>
+</li>
+</ol>
+<p>Despite these limitations, raw images are still very popular since they are very
+simple - there are a number of hardware based imagers on the marker which can
+produce raw images making it fairly convenient.</p>
+<h3>AFF (up to version 3).</h3>
+<p>AFF, the predecessor to AFF4 make significant improvements to the state of the
+art in acquisitions. The AFF format offered compression and started storing
+metadata within the image.</p>
+<p>Other similar commercial solutions also offered similar features (such as the
+EWF format) - more diverse metadata was added to these file formats and features
+such as encryption and digital signatures were also offered.</p>
+<p>Each forensic image format introduced a unique file format. This required a
+unique tool to read it and often require reverse engineering work (for
+proprietary tools).</p>
+<h2>The information model.</h2>
+<p>Rather than treat metadata as an after thought, the AFF4 format uses metadata as
+its central abstraction - everything is built around the metadata. In this
+regard AFF4 is more than simply a file format - it is more akin to a complete
+evidence management system.</p>
+<p>In AFF4 terminology, all known information about the world is stored in an
+<em>Information Model</em>. The AFF4 information model is centered around the concept
+of AFF4 objects.</p>
+<p>The following are some basic assumptions about the AFF4 information model:</p>
+<ol>
+<li>
+<p>AFF4 Objects are simply entities about which statements are made. AFF4
+objects have a globally unique name (called a URN). To make URNs unique we often
+use a GUID to generate a unique part of the name.</p>
+</li>
+<li>
+<p>AFF4 uses RDF to model the statement about the object. An RDF statement is
+simply a tuple of (subject, predicate, value), where subject is the URN we talk
+about and predicate is a verb from a known lexicon.</p>
+</li>
+<li>
+<p>AFF4 statements are stored in a <em>Resolver</em>. The resolver is a central point
+which manages the AFF4 information model. Note that typically the resolver will
+need to be populated with metadata before any AFF4 objects can be instantiated.</p>
+</li>
+</ol>
+<p>For example, consider the following snippet of RDF encoded in the <em>Turtle</em>
+encoding:</p>
+<div class="highlight"><pre><span class="nc">&lt;aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041/bin/zcmp&gt;</span>
+    <span class="nf">aff4:chunk_size</span> <span class="mi">32768</span> <span class="p">;</span>
+    <span class="nf">aff4:chunks_per_segment</span> <span class="mi">1024</span> <span class="p">;</span>
+    <span class="nf">aff4:compression</span> <span class="na">&lt;https://www.ietf.org/rfc/rfc1951.txt&gt;</span> <span class="p">;</span>
+    <span class="nf">aff4:size</span> <span class="mi">1779</span> <span class="p">;</span>
+    <span class="nf">aff4:stored</span> <span class="na">&lt;aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041&gt;</span> <span class="p">;</span>
+    <span class="o">a</span> <span class="na">aff4:image</span> <span class="p">.</span>
+</pre></div>
+
+
+<p>This clause contains a number of statements about an AFF4 object:</p>
+<ol>
+<li>
+<p>The AFF4 object we are talking about has a URN of
+<em>aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041/bin/zcmp</em>. Note that this URN is
+globally unique but we can see that it represents a file that was found at a
+path of <em>/bin/zcmp</em>.  The choice for the URN is completely up to the
+implementation. The only requirement is that the URN is globally unique - this
+implementation chose to append the source filename to the URN for a bit of
+context but this is only a convenience.</p>
+</li>
+<li>
+<p>We can see that the object is an <em>aff4:image</em> (more on this later). This
+simply signifies what type of object this is.</p>
+</li>
+<li>
+<p>The object is stored in a volume of URN
+<em>aff4://21803da1-a4e4-4cf7-b866-f4f94c6fb041</em>. More on this later.</p>
+</li>
+</ol>
+<h3>Object oriented modeling</h3>
+<p>We said before that AFF4 is an object oriented model. What does that mean? The
+AFF4 information model describes information about AFF4 objects. AFF4 objects
+are real implementations which can be instantiated by AFF4 implementations from
+the information in the model.</p>
+<p>We currently define a number of standard AFF4 objects. Each standard object
+contains a set of pre-defined predicates which can be used to describe it. An
+AFF4 implementation can read the information model and re-create an AFF4 object
+from the RDF triples. Standard AFF4 objects specify their behaviour in
+sufficient details so that different AFF4 implementations can interchange data
+freely.</p>
+<h3>Implicit relations</h3>
+<p>Since AFF4 is reliant on the information model, all AFF4 objects are described
+using RDF triples. However, in practice many triples are implicitly
+stated. Either because they take on a default value, or because their facts are
+obvious.</p>
+<p>For example, the AFF4 predicate <em>aff4:stored</em> describes where an AFF4 object is
+stored (which volume). However, when parsing an AFF4 volume we often already
+know some objects contained within it, simply by virtue of the volume format
+itself. It is therefore not needed to state these triples explicitely.</p>
+<p>AFF4 standard objects often define implicit relations and therefore allow some
+RDF statement to be deduced by context. In the following we will describe what
+triples may be omitted for each AFF4 object type.</p>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="active">
+       <a href="/docs/Overview/2_Volumes.html">
+          AFF4 Volumes
+          <span class="glyphicon glyphicon-arrow-right"></span>
+       </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+  </div>
+  <div class="col-md-2 sidebar">
+    <img src="/img/AFF4.png" class="logo"></img>
+
+  </div>
+</div>
+</div>
+  <script>
+   $(".activate_tooltip").tooltip();
+  </script>
+  </body>
+</html>
+

@@ -42,7 +42,7 @@ ript>
          <ul class="nav navbar-nav">
 
         <li>
-          <a class="active" href="/index.html">
+          <a class="" href="/index.html">
             Home
           </a>
         </li>
@@ -70,40 +70,46 @@ ript>
 <div class="row">
   <div class="col-md-2">
     
+ <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ </a>
+
+ <a href='/docs/Developers/index.html' class="btn btn-default btn-lg btn-block">
+   Developers
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li>
+   <a href='/docs/Developers/AFF4Objects.html' class="tree-link "  title="The AFF4Object.">
+      The AFF4Object.
+   </a>
+</li>
+</ul>
+ </div>
+
   </div>
 
   <div class="col-md-8">
-    <h1>AFF4 -The Advanced Forensics File Format</h1>
-<p>The Advanced Forensics File format 4 was originally designed and published in
-&ldquo;Extending the advanced forensic format to accommodate multiple data sources,
-logical evidence, arbitrary information and forensic workflow&rdquo; M.I. Cohen,
-Simson Garfinkel and Bradley Schatz, digital investigation 6 (2009) S57–S68.</p>
-<p>The format is an open source format used for the storage of digital evidence and
-data.</p>
-<p>The original paper was released with an earlier implementation written in
-python. This project is a complete open source re-implementation for a general
-purpose AFF4 library.</p>
-<h2>What is currently supported.</h2>
-<p>Not all features described in the paper are currently supported. The following
-features are currently supported:</p>
-<ol>
-<li>Writing and Reading ZipFile style volumes.</li>
-<li>Writing and Reading AFF4 Image streams using the deflate or snappy compressor.</li>
-<li>Writing and reading RDF metadata using both YAML and Turtle.</li>
-<li>Logical file acquisition.</li>
-<li>Map streams.</li>
-</ol>
-<p>What is not yet supported:</p>
-<ol>
-<li>Encrypted AFF4 volumes.</li>
-<li>Persistent data store.</li>
-<li>HTTP backed streams.</li>
-<li>Splitting an AFF4 Image across multiple volumes.</li>
-<li>Support for signed statements or Bill of Materials.</li>
-</ol>
-<h3>Notice</h3>
-<p>This is not an official Google product (experimental or otherwise), it is just
-code that happens to be owned by Google.</p>
+    
+
+
+<h1>Developers</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>These documents are intended for developers. They cover internal application
+APIs and implementation details.</p>
+
+<p>
+
+
   </div>
   <div class="col-md-2 sidebar">
     <img src="/img/AFF4.png" class="logo"></img>

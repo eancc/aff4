@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>AFF4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Forensic File Format 4">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link href="/css/aff4.css" rel="stylesheet">
+    <link href="/css/asciidoc.css" rel="stylesheet">
+    <link href="/css/treeview.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></sc\
+ript>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+   <nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+     <div class="container-fluid">
+       <div class="navbar-header">
+         <a class="navbar-brand" href="#">AFF4</a>
+       </div>
+
+       <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+
+        <li>
+          <a class="" href="/index.html">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a class="" href="/docs.html">
+            Documentation
+          </a>
+        </li>
+
+         </ul>
+         <form class="navbar-form navbar-right" role="search" action="/search.html">
+           <div class="form-group">
+             <input type="text" name="q" class="form-control" placeholder="Site Search">
+           </div>
+           <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+         </form>
+       </div> <!-- navbar-collapse -->
+     </div> <!-- container-fluid -->
+   </nav>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-2">
+    
+ <a href="/docs/index.html" class="btn btn-default btn-lg btn-block">
+  <span class="glyphicon glyphicon-arrow-left"></span> docs
+ </a>
+
+ <a href='/docs/Overview/index.html' class="btn btn-default btn-lg btn-block">
+   Overview
+ </a>
+ <p>
+ <div class='css-treeview'>
+   <ul class='nav nav-stacked'>
+<li>
+   <a href='/docs/Overview/1_Introduction.html' class="tree-link activate_tooltip"  title="AFF4 Introduction and basic concepts.">
+      AFF4 Introducti ...
+   </a>
+</li>
+
+<li>
+   <a href='/docs/Overview/2_Volumes.html' class="tree-link "  title="AFF4 Volumes">
+      AFF4 Volumes
+   </a>
+</li>
+</ul>
+ </div>
+
+  </div>
+
+  <div class="col-md-8">
+    
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/1_Introduction.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         AFF4 Introduction and basic concepts.
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+<h1>AFF4 Volumes</h1>
+
+<div class="abstract">
+
+</div>
+
+
+
+
+
+<p>In AFF4 terminology, a <em>Volume</em> is a single file which contains other AFF4
+objects within itself. The Volume itself is an abstract concept. AFF4 defines a
+number of standard implementations for AFF4 volumes, the most common of these if
+the <em>ZipFile</em> volume which is based on the popular Zip archive format.</p>
+<p>Since AFF4 objects are defined both in terms of their information model, and
+their data, Volumes typically contain both metadata and actual data. We term a
+<em>Segment</em> as an atomic piece of data that can be stored in a volume. Segments
+are also AFF4 objects and therefore also have globally unique URNs.</p>
+<h2>Abstract and Concerete names.</h2>
+<p>A repeated pattern with the AFF4 design is that it talks about AFF4 objects with
+globally unique URNs. However, these objects represent and refer to a real file
+with a filename.</p>
+<p>Volumes may choose to store and represent the abstract AFF4 object&rsquo;s URN in a
+suitable way appropriate to the storage media. Therefore there is always a well
+defined mapping between the abstract URN and the concerete name.</p>
+<p>For example, if the Volume chooses to store AFF4 objects as files on the
+filesystem, the URN may need to be escapes to remove characters which are not
+allowed within file names. This escaping scheme (although well defined) is
+merely a representational constraint of the AFF4 volume. We still talk about
+AFF4 URNs in their abstract form, and then locate them with in the volume.</p>
+
+<p>
+
+<nav class="navbar navbar-default" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+    <li class="active">
+       <a href="/docs/Overview/1_Introduction.html">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+         AFF4 Introduction and basic concepts.
+       </a>
+    </li>
+  </ul>
+
+
+</nav>
+
+
+  </div>
+  <div class="col-md-2 sidebar">
+    <img src="/img/AFF4.png" class="logo"></img>
+
+  </div>
+</div>
+</div>
+  <script>
+   $(".activate_tooltip").tooltip();
+  </script>
+  </body>
+</html>
+
