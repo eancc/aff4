@@ -77,7 +77,7 @@ def default(page=None):
 {nav}
 <div class="container-fluid">
 <div class="row">
-  <div class="hidden-xs col-md-3">
+  <div class="col-md-3">
     {page.navigator}
   </div>
 
